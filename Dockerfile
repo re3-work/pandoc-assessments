@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM pandoc/latex:latest
+FROM pandoc/latex:3.6-ubuntu
 RUN tlmgr list
 RUN tlmgr update --self && \
     tlmgr install \
@@ -12,6 +12,6 @@ RUN tlmgr update --self && \
     wrapfig \
     titlesec
 
-RUN apk --no-cache add msttcorefonts-installer fontconfig && \
-    update-ms-fonts && \
+RUN apt-get update && apt-get install -y \
+    ttf-mscorefonts-installer && \
     fc-cache -f
